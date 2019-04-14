@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="author" content="Konsap">
+        <title>Palindrome</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <style>
+            body {
+                background-image: url("https://images.homedepot-static.com/productImages/24036b49-d0aa-4cc2-8c89-2ecf782b943a/svn/silver-glacier-bay-vanity-mirrors-81178-64_1000.jpg");
+                background-position: center; 
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            #palin {
+                width: 300px;
+                margin: auto;
+                text-align: center;
+            }
+            table, tr, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                padding: 5px;
+            }
+            table {
+                margin: auto;
+                padding: 10px;
+            }
+            #nupp {
+                width: 200px;
+                margin: 3px;
+
+            }
+            #input {
+                width: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="palin">
+            <h4>easy palindrome checker</h4>
+            
+            <input type="text" id="input" required>
+            <br>
+            <button id="nupp">check</button>
+            <p id="ans"></p>
+            
+            <table id="pTable">
+            <tr>
+                <th>nr</th>
+                <th>input</th>
+                <th>result</th>
+            </tr>
+            </table>
+        </div>
+        <script>
+            function pd () {
+                // defines input as 'string'
+                var string = document.getElementById('input').value;
+                //checks input with the palindrome function
+                var check = isPalindrome(string);
+                // if no input try to be smart or sth
+                if(string === ''){
+                    document.getElementById("ans").innerHTML = "Hmm... I guess it's the same backwards so we can count it as a palindrome but you should try words too."
+                } //if input is a palindrome
+                  else if(check === true) {
+                    document.getElementById("ans").innerHTML = "It is definitely a palindrome."
+                } // if it's not
+                  else {
+                    document.getElementById("ans").innerHTML = "Sorry, not a palindrome."
+                }
+        
+                // insert table row with three cells
+                var x = document.getElementById('pTable').insertRow(-1);
+                var y = x.insertCell(0);
+                var z = x.insertCell(1);
+                var c = x.insertCell(2);
+                // inserts values to cells
+                y.innerHTML = count;
+                z.innerHTML = string;
+                c.innerHTML = check;
+                
+                // result background color
+                if(check === true) {
+                    c.style.backgroundColor = "green"
+                } else {
+                    c.style.backgroundColor = "red"
+                }
+            }
+            document.getElementById('nupp').addEventListener('click', pd);
+            
+            // counting the table rows
+            var button = document.getElementById('nupp'), count = 1;
+                button.onclick = function(){
+                    count += 1;
+                }
+            
+            // function for determining palindrome
+            function isPalindrome (word) {
+                //  defines unsuitable characters
+        	    var usc = /[^A-Za-z0-9]/g;
+        	    //  makes the word lowercase and gets rid of the unsuitable characters by replacing them
+                var lowWord = word.toLowerCase().replace(usc, '');
+                //  splits the word into characters, reverses them and joins back to word
+                var reverseWord = lowWord.split('').reverse().join(''); 
+                //  returns if the input word is a palindrome or not
+                return lowWord === reverseWord;
+            }
+        
+        console.log (isPalindrome("anna") === true);
+        console.log (isPalindrome("Anna") === true);
+        console.log (isPalindrome("anna ") === true);
+        console.log (isPalindrome("YellowSubmarine") === false);
+        
+        /* fun palindromes to try out if bored
+        console.log (isPalindrome("Was it a car or a cat I saw?") === true);
+        console.log (isPalindrome("Madam, I'm Adam") === true);
+        console.log (isPalindrome("Never odd or even.") === true);
+        console.log (isPalindrome("it certainly is not!") === false);
+        */
+        </script>
+    </body>
+</html>
